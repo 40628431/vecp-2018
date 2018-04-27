@@ -1,0 +1,88 @@
+-- 導入 "js" 模組
+local js = require "js"
+-- global 就是 javascript 的 window
+local global = js.global
+local document = global.document
+-- html 檔案中 canvas　id 設為 "canvas"
+local canvas = document:getElementById("canvas")
+-- 將 ctx 設為 canvas 2d 繪圖畫布變數
+local ctx = canvas:getContext("2d")
+
+-- 屬性呼叫使用 . 而方法呼叫使用 :
+-- 設定填圖顏色
+ctx.fillStyle = "rgb(0,0,150)"
+-- 設定畫筆顏色
+ctx.strokeStyle = "rgb(0,0,150)"
+
+
+
+-- 乘上 deg 可轉為徑度單位
+deg = math.pi / 180
+
+-- 建立多邊形定點位置畫線函式
+function star(radius, xc, yc, n)
+    --radius = 100
+    --xc = 200
+    --yc = 200
+    xi = xc + radius*math.cos((360/n)*deg+0*deg)
+    yi = yc - radius*math.sin((360/n)*deg+0*deg)
+    ctx:beginPath()
+    ctx:moveTo(xi,yi)
+    for i = 2, n+1 do
+        x = xc + radius*math.cos((360/n)*deg*i+0*deg)
+        y = yc - radius*math.sin((360/n)*deg*i+0*deg)
+        ctx:lineTo(x,y)
+    end
+end
+--藍6邊
+star(100, 300, 200, 6)
+ctx:closePath()
+ctx:fill()
+--中白6邊
+star(60, 300, 200,6)
+ctx:closePath()
+ctx:stroke()
+ctx.fillStyle = '#fff'
+ctx:fill()
+--上層覆蓋白6邊
+star(60, 300, 98,6)
+ctx:closePath()
+ctx.fillStyle = '#fff'
+ctx:fill()
+--上層覆蓋白6邊
+star(60, 250, 96,6)
+ctx:closePath()
+ctx.fillStyle = '#fff'
+ctx:fill()
+--上層覆蓋白6邊
+star(60, 350, 96,6)
+ctx:closePath()
+ctx.fillStyle = '#fff'
+ctx:fill()
+--中間圓
+star(30, 300, 200,200)
+ctx:closePath()
+ctx:stroke()
+ctx.fillStyle = "rgb(0,0,150)"
+ctx:fill()
+--圓中白線條
+star(12, 300, 200,4)
+ctx.fillStyle = '#fff'
+ctx:fill()
+--圓中白線條
+star(12, 310, 210,4)
+ctx.fillStyle = '#fff'
+ctx:fill()
+--圓中白線條
+star(12, 320, 220,4)
+ctx.fillStyle = '#fff'
+ctx:fill()
+--圓中白線條
+star(12, 290, 190,4)
+ctx.fillStyle = '#fff'
+ctx:fill()
+--圓中白線條
+star(12, 280, 180,4)
+ctx.fillStyle = '#fff'
+ctx:fill()
+
